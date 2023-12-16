@@ -48,11 +48,14 @@ root->left=creat(root->left,data);
 return root;
 }
 int main()
-{struct node*head=NULL;
-head=creat(head,6);
-head=creat(head,3);
-head=creat(head,4);
-head=creat(head,2);
+{struct node,*ptr,*head=NULL;
+ int data i,size;
+ printf("enter the size of tree ");
+ scanf("%d",&size);
+ for(i=0;i<n;i++)
+   {printf("enter the data");
+    scanf("%d",&data);
+     ptr=creat(ptr,data);}
 print(head);
 //for serching the element
 struct node*search=Search(head,3);
