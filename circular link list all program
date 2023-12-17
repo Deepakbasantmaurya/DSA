@@ -1,90 +1,77 @@
-// Online C compiler to run C program online
-/******************************************************************************
-
-Welcome to GDB Online.
-  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
-  Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
-#include <stdio.h>
+/* *********write a all program of circular link list************/
+#include<stdio.h>
 #include<stdlib.h>
 typedef struct node{int data;
-struct node *link;
+struct node*link;
 }node;
-node*adatempty()
-{node*first=(node*)malloc(sizeof(node));
- printf("enter the data while no node exist");
- scanf("%d",&first->data);
- first->link=first;
- return first;
+struct node*addatempty(int data)
+{struct node*temp=(node*)malloc(sizeof(node));
+temp->data=data;
+temp->link=temp;
+return temp;
 }
- node*adatend(struct node* temp)
-{ node*temp1=( node*)malloc(sizeof( node));
- printf("enter the data at end node ");
- scanf("%d",&temp1->data);
- node*p=temp;
- while(temp->link!=p){
-     temp=temp->link;
- }
- temp->link=temp1;
-          temp1->link=p;
-          return p;
+struct node*addatbeg(struct node*tail,int data)
+{struct node*newp=(node*)malloc(sizeof(node));
+newp->data=data;
+newp->link=NULL;
+if(tail==NULL)
+{newp->link=newp;
+tail=newp;
 }
-node*adatbeg(struct node* temp)
-{ node*temp1=( node*)malloc(sizeof( node));
- printf("enter the data at first  node ");
- scanf("%d",&temp1->data);
- node*p=temp;
- while(temp->link!=p){
-     temp=temp->link;
- }
- temp1->link=temp->link;
-          temp->link=temp1;
-          return temp1;
+else{
+	newp->link=tail->link;
+	tail->link=newp;
 }
-node*adatpos(node*temp)
-{node*new=(node*)malloc(sizeof(node));
-printf("enter the pos which pos you want to insert the data");int data,pos;
+return tail;
+}
+struct node*addatend(struct node*tail,int data)
+{struct node*newp=(node*)malloc(sizeof(node));
+newp->data=data;
+newp->link=NULL;
+if(tail==NULL)
+{newp->link=newp;
+tail=newp;
+}
+else{
+	newp->link=tail->link;
+	tail->link=newp;
+	tail=tail->link;
+}
+return tail;
+}
+struct node*addatpos(struct node*tail,int data)
+{printf("enter the pos which pos data you want to insert");int pos;
 scanf("%d",&pos);
-printf("enter the data ");
-scanf("%d",&new->data);node*p=temp;
---pos;
-while(pos!=1)
-{temp=temp->link;
+struct node*newp=(node*)malloc(sizeof(node));
+newp->data=data;
+struct node*p=tail->link;
+while(pos>2)
+{p=p->link;
 pos--;
 }
-
-new->link=temp->link;
-temp->link=new;
+if(pos==1)
+{tail=addatbeg(tail,data);
 }
-
-
-
-void display(struct node *ptr)
-{node*p=ptr->link;
-do{printf("%d->",ptr->data);
-ptr=ptr->link;
-}while(ptr->link!=p);}
-
- int main()
- { node *head;
- head=adatempty();
- node* ptr=head;
- printf("enter the node size how much you want ");
- int n;scanf("%d",&n);int i;
- for(i=0;i<n;i++)
- {
- ptr=adatend(ptr);
- } display(head);
-     head=adatbeg(head);
-     display(head);
-     adatpos(head);
-      display(head);
- }
- 
- 
-
-
-
-
+else if(p==tail)
+{tail=addatend(tail,data);
+}
+else
+{newp->link=p->link;
+p->link=newp;
+}
+return tail;
+}
+void print(struct node*tail)
+{node*p=tail->link;
+do{printf("%d\n",p->data);
+p=p->link;
+}while(tail->link!=p);
+}
+int main()
+{struct node*tail=NULL;
+tail=addatempty(89);
+tail=addatbeg(tail,1);
+tail=addatend(tail,8);
+tail=addatpos(tail,9);
+print(tail);
+}
