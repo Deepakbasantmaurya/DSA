@@ -1,4 +1,4 @@
-/* *********write a all program of circular link list************/
+
 #include<stdio.h>
 #include<stdlib.h>
 typedef struct node{int data;
